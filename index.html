@@ -5,125 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人学习感悟随笔</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Microsoft Yahei", sans-serif;
-        }
-        body {
-            background-color: #f7f8fa;
-            color: #333;
-            line-height: 1.8;
-            padding: 20px 15px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .blog-header {
-            text-align: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .blog-header h1 {
-            color: #2d3748;
-            font-size: clamp(22px,5vw,28px);
-            margin-bottom: 8px;
-        }
-        .blog-header p {
-            color: #718096;
-            font-size: clamp(13px,3vw,15px);
-        }
-        .article-item {
-            background: #fff;
-            border-radius: 12px;
-            padding: clamp(18px,4vw,28px);
-            margin-bottom: 20px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        }
-        .art-title {
-            font-size: clamp(16px,4vw,20px);
-            color: #2b6cb0;
-            margin-bottom: 10px;
-        }
-        .art-time {
-            font-size: clamp(12px,2.5vw,13px);
-            color: #a0aec0;
-            margin-bottom: 12px;
-        }
-        .art-content {
-            font-size: clamp(14px,3vw,16px);
-            color: #4a5568;
-            text-indent: 2em;
-            word-break: break-all;
-        }
-        .admin-bar {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .btn {
-            padding: 8px 14px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            margin: 4px;
-            font-size: clamp(13px,3vw,14px);
-        }
-        .btn-primary {
-            background: #2b6cb0;
-            color: white;
-        }
-        .btn-danger {
-            background: #e53e3e;
-            color: white;
-        }
-        .btn-sm {
-            padding: 4px 8px;
-            font-size: clamp(12px,2.5vw,13px);
-        }
-        .login-box {
-            max-width: 350px;
-            margin: 0 auto;
-            background: white;
-            padding: 25px 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-        .edit-box {
-            background: white;
-            padding: 18px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        .action-btns {
-            margin-top: 12px;
-            text-align: right;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #a0aec0;
-            font-size: clamp(12px,2.5vw,14px);
-        }
-        .loading{text-align:center;padding:20px;color:#666;}
-        @media (max-width: 480px) {
-            .action-btns {text-align: center;}
-            .btn {width: 30%;}
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft Yahei", sans-serif; }
+        body { background-color: #f7f8fa; color: #333; line-height: 1.8; padding: 20px 15px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .blog-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb; }
+        .blog-header h1 { color: #2d3748; font-size: clamp(22px,5vw,28px); margin-bottom: 8px; }
+        .blog-header p { color: #718096; font-size: clamp(13px,3vw,15px); }
+        .article-item { background: #fff; border-radius: 12px; padding: clamp(18px,4vw,28px); margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .art-title { font-size: clamp(16px,4vw,20px); color: #2b6cb0; margin-bottom: 10px; }
+        .art-time { font-size: clamp(12px,2.5vw,13px); color: #a0aec0; margin-bottom: 12px; }
+        .art-content { font-size: clamp(14px,3vw,16px); color: #4a5568; text-indent: 2em; word-break: break-all; }
+        .admin-bar { text-align: center; margin-bottom: 25px; }
+        .btn { padding: 8px 14px; border-radius: 6px; border: none; cursor: pointer; margin: 4px; font-size: clamp(13px,3vw,14px); }
+        .btn-primary { background: #2b6cb0; color: white; }
+        .btn-danger { background: #e53e3e; color: white; }
+        .btn-sm { padding: 4px 8px; font-size: clamp(12px,2.5vw,13px); }
+        .login-box { max-width: 350px; margin: 0 auto; background: white; padding: 25px 20px; border-radius: 12px; text-align: center; }
+        input, textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
+        .edit-box { background: white; padding: 18px; border-radius: 12px; margin-bottom: 20px; }
+        textarea { min-height: 120px; resize: vertical; }
+        .action-btns { margin-top: 12px; text-align: right; }
+        footer { text-align: center; margin-top: 40px; color: #a0aec0; font-size: clamp(12px,2.5vw,14px); }
+        .loading, .error { text-align:center; padding:20px; color:#666; }
+        .error { color: #e53e3e; }
+        @media (max-width: 480px) { .action-btns {text-align: center;} .btn {width: 30%;} }
     </style>
 </head>
 <body>
@@ -134,6 +39,7 @@
     </div>
     <div class="admin-bar" id="adminBar"></div>
     <div class="loading" id="loading">数据加载中...</div>
+    <div class="error" id="errorMsg" style="display:none;"></div>
     <div id="articleList"></div>
     <div class="edit-box" id="editBox" style="display: none;">
         <input id="editTitle" placeholder="文章标题">
@@ -148,14 +54,15 @@
 </div>
 
 <script>
-// 仅修改此处个人信息
+// ========== 关键配置 ==========
 const CONFIG = {
     username: "rongsongge",
     repo: "blog",
-    token: "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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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",
+    token: "在这里填入你全新生成的、只复制了一次的ghp_开头的令牌",
     fileName: "articles.json",
     pwd: "82704001"
 };
+
 let articles = [];
 let isLogin = localStorage.getItem("isLogin") === "true";
 let editIndex = -1;
@@ -164,9 +71,14 @@ let fileSha = "";
 window.onload = initData;
 
 async function initData(){
-    await getCloudArticles();
-    render();
-    document.getElementById("loading").style.display = "none";
+    try {
+        await getCloudArticles();
+        render();
+    } catch (e) {
+        showError("初始化失败: " + e.message);
+    } finally {
+        document.getElementById("loading").style.display = "none";
+    }
 }
 
 async function getCloudArticles(){
@@ -178,12 +90,17 @@ async function getCloudArticles(){
             const data = await res.json();
             fileSha = data.sha;
             articles = JSON.parse(decodeURIComponent(escape(atob(data.content))));
+            if (articles.length === 0) {
+                // 如果是空的，自动创建一篇测试文章
+                articles = [{title:"云端同步已成功！",time:"2026-05-23",content:"恭喜！你现在可以跨设备编辑博客了，手机和电脑都能看到新内容。"}];
+                await saveCloudArticles();
+            }
         }else{
-            articles = [{title:"初始化博客内容",time:"2026-05-23",content:"云端同步功能已就绪，多设备编辑内容互通"}];
-            await saveCloudArticles();
+            throw new Error("获取数据失败，状态码: " + res.status);
         }
     }catch(e){
-        articles = [];
+        showError("读取数据失败: " + e.message);
+        throw e;
     }
 }
 
@@ -202,9 +119,16 @@ async function saveCloudArticles(){
             },
             body:JSON.stringify(reqBody)
         });
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error("保存失败: " + (err.message || res.status));
+        }
         const resData = await res.json();
         if(resData.content) fileSha = resData.content.sha;
-    }catch(e){}
+    }catch(e){
+        showError("保存数据失败: " + e.message);
+        throw e;
+    }
 }
 
 function render(){
@@ -253,6 +177,12 @@ function renderArticles(){
 function renderFooter(){
     const foot = document.getElementById("footer");
     foot.innerHTML = isLogin ? "✅ 已登录云端管理模式" : "个人随笔博客 | 全局同步浏览";
+}
+
+function showError(msg) {
+    const errDiv = document.getElementById("errorMsg");
+    errDiv.style.display = "block";
+    errDiv.innerText = "错误: " + msg;
 }
 
 function login(){
