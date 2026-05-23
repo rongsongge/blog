@@ -58,10 +58,14 @@
 const CONFIG = {
     username: "rongsongge",
     repo: "blog",
-    token: "在这里填入你全新生成的、只复制了一次的ghp_开头的令牌",
+    // 这里填写你新生成的Token，注意：ghp_开头，不要有空格和换行
+    token: "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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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", 
     fileName: "articles.json",
     pwd: "82704001"
 };
+
+// 自动清理Token中的特殊字符
+CONFIG.token = CONFIG.token.trim().replace(/[\x00-\x1F\x7F]/g, "");
 
 let articles = [];
 let isLogin = localStorage.getItem("isLogin") === "true";
@@ -84,14 +88,13 @@ async function initData(){
 async function getCloudArticles(){
     try{
         const res = await fetch(`https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents/${CONFIG.fileName}`,{
-            headers:{"Authorization":"token "+CONFIG.token}
+            headers:{"Authorization":"token " + CONFIG.token}
         });
         if(res.ok){
             const data = await res.json();
             fileSha = data.sha;
             articles = JSON.parse(decodeURIComponent(escape(atob(data.content))));
             if (articles.length === 0) {
-                // 如果是空的，自动创建一篇测试文章
                 articles = [{title:"云端同步已成功！",time:"2026-05-23",content:"恭喜！你现在可以跨设备编辑博客了，手机和电脑都能看到新内容。"}];
                 await saveCloudArticles();
             }
@@ -114,7 +117,7 @@ async function saveCloudArticles(){
         const res = await fetch(`https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents/${CONFIG.fileName}`,{
             method:"PUT",
             headers:{
-                "Authorization":"token "+CONFIG.token,
+                "Authorization":"token " + CONFIG.token,
                 "Content-Type":"application/json"
             },
             body:JSON.stringify(reqBody)
