@@ -119,6 +119,7 @@
             color: #a0aec0;
             font-size: clamp(12px,2.5vw,14px);
         }
+        .loading{text-align:center;padding:20px;color:#666;}
         @media (max-width: 480px) {
             .action-btns {text-align: center;}
             .btn {width: 30%;}
@@ -132,6 +133,7 @@
         <p>记录成长点滴，沉淀思考</p>
     </div>
     <div class="admin-bar" id="adminBar"></div>
+    <div class="loading" id="loading">数据加载中...</div>
     <div id="articleList"></div>
     <div class="edit-box" id="editBox" style="display: none;">
         <input id="editTitle" placeholder="文章标题">
@@ -146,24 +148,74 @@
 </div>
 
 <script>
-const PASSWORD = "82704001";
-let articles = JSON.parse(localStorage.getItem("articles")) || [
-    {title:"网页学习开启新旅程",time:"2026-05-22",content:"从零开始学习网页开发技术，循序渐进掌握页面搭建、数据存储与免费部署方法。"},
-    {title:"两种网页技术使用心得",time:"2026-05-22",content:"HTML+Vue适合美观博客展示，Streamlit适合快速制作数据工具。"}
-];
+// 仅修改此处个人信息
+const CONFIG = {
+    username: "rongsongge",
+    repo: "blog",
+    token: "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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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",
+    fileName: "articles.json",
+    pwd: "82704001"
+};
+let articles = [];
 let isLogin = localStorage.getItem("isLogin") === "true";
 let editIndex = -1;
+let fileSha = "";
 
-render();
-function render() {
+window.onload = initData;
+
+async function initData(){
+    await getCloudArticles();
+    render();
+    document.getElementById("loading").style.display = "none";
+}
+
+async function getCloudArticles(){
+    try{
+        const res = await fetch(`https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents/${CONFIG.fileName}`,{
+            headers:{"Authorization":"token "+CONFIG.token}
+        });
+        if(res.ok){
+            const data = await res.json();
+            fileSha = data.sha;
+            articles = JSON.parse(decodeURIComponent(escape(atob(data.content))));
+        }else{
+            articles = [{title:"初始化博客内容",time:"2026-05-23",content:"云端同步功能已就绪，多设备编辑内容互通"}];
+            await saveCloudArticles();
+        }
+    }catch(e){
+        articles = [];
+    }
+}
+
+async function saveCloudArticles(){
+    try{
+        const rawStr = JSON.stringify(articles,null,2);
+        const encodeStr = btoa(unescape(encodeURIComponent(rawStr)));
+        const reqBody = {message:"更新博客内容",content:encodeStr};
+        if(fileSha) reqBody.sha = fileSha;
+
+        const res = await fetch(`https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents/${CONFIG.fileName}`,{
+            method:"PUT",
+            headers:{
+                "Authorization":"token "+CONFIG.token,
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(reqBody)
+        });
+        const resData = await res.json();
+        if(resData.content) fileSha = resData.content.sha;
+    }catch(e){}
+}
+
+function render(){
     renderAdminBar();
     renderArticles();
     renderFooter();
 }
 
-function renderAdminBar() {
+function renderAdminBar(){
     const bar = document.getElementById("adminBar");
-    if (!isLogin) {
+    if(!isLogin){
         bar.innerHTML = `
             <div class="login-box">
                 <h3 style="margin-bottom:15px;font-size:18px;">管理员登录</h3>
@@ -171,7 +223,7 @@ function renderAdminBar() {
                 <button class="btn btn-primary" onclick="login()">登录管理</button>
             </div>
         `;
-    } else {
+    }else{
         bar.innerHTML = `
             <button class="btn btn-primary" onclick="addNew()">新增文章</button>
             <button class="btn btn-danger" onclick="logout()">退出登录</button>
@@ -179,93 +231,89 @@ function renderAdminBar() {
     }
 }
 
-function renderArticles() {
+function renderArticles(){
     const list = document.getElementById("articleList");
     let html = "";
-    articles.forEach((item, index) => {
+    articles.forEach((item,index)=>{
         html += `
         <div class="article-item">
             <h2 class="art-title">${item.title}</h2>
             <div class="art-time">${item.time}</div>
             <div class="art-content">${item.content}</div>
-            ${isLogin ? `
+            ${isLogin?`
             <div class="action-btns">
                 <button class="btn btn-sm" onclick="editArticle(${index})">修改</button>
-                <button class="btn btn-sm btn-danger" onclick="deleteArticle(${index})">删除</button>
-            </div>
-            ` : ""}
-        </div>
-        `;
+                <button class="btn btn-sm btn-danger" onclick="delArticle(${index})">删除</button>
+            </div>`:""}
+        </div>`;
     });
     list.innerHTML = html;
 }
 
-function renderFooter() {
-    const footer = document.getElementById("footer");
-    footer.innerHTML = isLogin ? "✅ 已登录管理模式" : "个人随笔博客 | 游客只读模式";
+function renderFooter(){
+    const foot = document.getElementById("footer");
+    foot.innerHTML = isLogin ? "✅ 已登录云端管理模式" : "个人随笔博客 | 全局同步浏览";
 }
 
-function login() {
-    const pwd = document.getElementById("pwd").value.trim();
-    if (pwd === PASSWORD) {
+function login(){
+    let p = document.getElementById("pwd").value.trim();
+    if(p === CONFIG.pwd){
         isLogin = true;
-        localStorage.setItem("isLogin", "true");
+        localStorage.setItem("isLogin","true");
         render();
-    } else {
-        alert("密码输入错误，请重新尝试");
+    }else{
+        alert("密码错误");
     }
 }
 
-function logout() {
+function logout(){
     isLogin = false;
     localStorage.removeItem("isLogin");
     render();
 }
 
-function addNew() {
+function addNew(){
     editIndex = -1;
     document.getElementById("editTitle").value = "";
-    document.getElementById("editTime").value = new Date().toLocaleDateString().replaceAll("/", "-");
+    document.getElementById("editTime").value = new Date().toLocaleDateString().replaceAll("/","-");
     document.getElementById("editContent").value = "";
     document.getElementById("editBox").style.display = "block";
 }
 
-function editArticle(index) {
+function editArticle(index){
     editIndex = index;
-    const item = articles[index];
+    let item = articles[index];
     document.getElementById("editTitle").value = item.title;
     document.getElementById("editTime").value = item.time;
     document.getElementById("editContent").value = item.content;
     document.getElementById("editBox").style.display = "block";
 }
 
-function saveArticle() {
-    const title = document.getElementById("editTitle").value.trim();
-    const time = document.getElementById("editTime").value.trim();
-    const content = document.getElementById("editContent").value.trim();
-    if (!title || !content) {
-        alert("标题与文章内容不能为空");
+async function saveArticle(){
+    let title = document.getElementById("editTitle").value.trim();
+    let time = document.getElementById("editTime").value.trim();
+    let content = document.getElementById("editContent").value.trim();
+    if(!title||!content){
+        alert("标题和内容不能为空");
         return;
     }
-    const newArticle = { title, time, content };
-    if (editIndex === -1) {
-        articles.unshift(newArticle);
-    } else {
-        articles[editIndex] = newArticle;
-    }
-    localStorage.setItem("articles", JSON.stringify(articles));
+    let obj = {title,time,content};
+    editIndex === -1 ? articles.unshift(obj) : articles[editIndex] = obj;
     document.getElementById("editBox").style.display = "none";
+    await saveCloudArticles();
+    await getCloudArticles();
     render();
 }
 
-function deleteArticle(index) {
-    if (!confirm("确定要删除这篇文章吗？")) return;
-    articles.splice(index, 1);
-    localStorage.setItem("articles", JSON.stringify(articles));
+async function delArticle(index){
+    if(!confirm("确定删除该文章？"))return;
+    articles.splice(index,1);
+    await saveCloudArticles();
+    await getCloudArticles();
     render();
 }
 
-function cancelEdit() {
+function cancelEdit(){
     document.getElementById("editBox").style.display = "none";
 }
 </script>
