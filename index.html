@@ -5,59 +5,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人学习感悟随笔</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft Yahei", sans-serif; }
-        body { background-color: #f7f8fa; color: #333; line-height: 1.8; padding: 20px 15px; }
-        .container { max-width: 800px; margin: 0 auto; }
-        .blog-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb; }
-        .blog-header h1 { color: #2d3748; font-size: clamp(22px,5vw,28px); margin-bottom: 8px; }
-        .blog-header p { color: #718096; font-size: clamp(13px,3vw,15px); }
-        .article-item { background: #fff; border-radius: 12px; padding: clamp(18px,4vw,28px); margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        .art-title { font-size: clamp(16px,4vw,20px); color: #2b6cb0; margin-bottom: 10px; }
-        .art-time { font-size: clamp(12px,2.5vw,13px); color: #a0aec0; margin-bottom: 12px; }
-        .art-content { font-size: clamp(14px,3vw,16px); color: #4a5568; text-indent: 2em; word-break: break-all; }
-        .admin-bar { text-align: center; margin-bottom: 25px; }
-        .btn { padding: 8px 14px; border-radius: 6px; border: none; cursor: pointer; margin: 4px; font-size: clamp(13px,3vw,14px); }
-        .btn-primary { background: #2b6cb0; color: white; }
-        .btn-danger { background: #e53e3e; color: white; }
-        .btn-sm { padding: 4px 8px; font-size: clamp(12px,2.5vw,13px); }
-        .login-box { max-width: 350px; margin: 0 auto; background: white; padding: 25px 20px; border-radius: 12px; text-align: center; }
-        input, textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
-        .edit-box { background: white; padding: 18px; border-radius: 12px; margin-bottom: 20px; }
-        textarea { min-height: 120px; resize: vertical; }
-        .action-btns { margin-top: 12px; text-align: right; }
-        footer { text-align: center; margin-top: 40px; color: #a0aec0; font-size: clamp(12px,2.5vw,14px); }
-        @media (max-width: 480px) { .action-btns {text-align: center;} .btn {width: 30%;} }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #f7f8fa;
+            color: #333;
+            line-height: 1.8;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .blog-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .blog-header h1 {
+            color: #2d3748;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .blog-header p {
+            color: #718096;
+            font-size: 15px;
+        }
+        .article-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .art-title {
+            font-size: 20px;
+            color: #2b6cb0;
+            margin-bottom: 12px;
+        }
+        .art-time {
+            font-size: 13px;
+            color: #a0aec0;
+            margin-bottom: 15px;
+        }
+        .art-content {
+            font-size: 16px;
+            color: #4a5568;
+            text-indent: 2em;
+        }
+        .admin-bar {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .btn-primary {
+            background: #2b6cb0;
+            color: white;
+        }
+        .btn-danger {
+            background: #e53e3e;
+            color: white;
+        }
+        .btn-sm {
+            padding: 4px 10px;
+            font-size: 14px;
+        }
+        .login-box {
+            max-width: 350px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        .edit-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .edit-box input, .edit-box textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        textarea {
+            min-height: 120px;
+        }
+        .action-btns {
+            margin-top: 15px;
+            text-align: right;
+        }
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #a0aec0;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
+
 <div class="container">
     <div class="blog-header">
         <h1>个人学习感悟随笔</h1>
         <p>记录成长点滴，沉淀思考</p>
     </div>
+
+    <!-- 登录/管理栏 -->
     <div class="admin-bar" id="adminBar"></div>
+
+    <!-- 文章列表 -->
     <div id="articleList"></div>
+
+    <!-- 编辑区域 -->
     <div class="edit-box" id="editBox" style="display: none;">
         <input id="editTitle" placeholder="文章标题">
-        <input id="editTime" placeholder="日期 如：2026-05-22">
+        <input id="editTime" placeholder="日期 如：2025-12-23">
         <textarea id="editContent" placeholder="文章内容"></textarea>
         <div class="action-btns">
             <button class="btn btn-primary" onclick="saveArticle()">保存文章</button>
             <button class="btn" onclick="cancelEdit()">取消</button>
         </div>
     </div>
+
+    <!-- 页脚 -->
     <footer id="footer"></footer>
 </div>
 
 <script>
-const PASSWORD = "82704001";
+// ====================== 配置 ======================
+const PASSWORD = "123456"; // 你的管理密码（可修改）
 let articles = JSON.parse(localStorage.getItem("articles")) || [
-    {title:"网页学习开启新旅程",time:"2026-05-22",content:"从零开始学习网页开发技术，循序渐进掌握页面搭建、数据存储与免费部署方法。"},
-    {title:"两种网页技术使用心得",time:"2026-05-22",content:"HTML+Vue适合美观博客展示，Streamlit适合快速制作数据工具。"}
+    { title: "网页学习开启新旅程", time: "2025-12-23", content: "从零开始学习网页，每天进步一点点，坚持就是力量。" },
+    { title: "技术选择感悟", time: "2025-12-23", content: "前端适合展示，Streamlit适合工具，找准定位很重要。" }
 ];
 let isLogin = localStorage.getItem("isLogin") === "true";
 let editIndex = -1;
 
+// ====================== 页面渲染 ======================
 render();
 function render() {
     renderAdminBar();
@@ -70,9 +176,9 @@ function renderAdminBar() {
     if (!isLogin) {
         bar.innerHTML = `
             <div class="login-box">
-                <h3 style="margin-bottom:15px;font-size:18px;">管理员登录</h3>
-                <input type="password" id="pwd" placeholder="输入管理密码">
-                <button class="btn btn-primary" onclick="login()">登录管理</button>
+                <h3>管理员登录</h3>
+                <input type="password" id="pwd" placeholder="输入密码">
+                <button class="btn btn-primary" onclick="login()">登录</button>
             </div>
         `;
     } else {
@@ -106,17 +212,20 @@ function renderArticles() {
 
 function renderFooter() {
     const footer = document.getElementById("footer");
-    footer.innerHTML = isLogin ? "✅ 已登录管理模式" : "个人随笔博客 | 游客只读模式";
+    footer.innerHTML = isLogin 
+        ? "✅ 已登录管理模式" 
+        : "个人随笔博客 | 游客只读模式";
 }
 
+// ====================== 功能 ======================
 function login() {
-    const pwd = document.getElementById("pwd").value.trim();
+    const pwd = document.getElementById("pwd").value;
     if (pwd === PASSWORD) {
         isLogin = true;
         localStorage.setItem("isLogin", "true");
         render();
     } else {
-        alert("密码输入错误，请重新尝试");
+        alert("密码错误");
     }
 }
 
@@ -144,11 +253,11 @@ function editArticle(index) {
 }
 
 function saveArticle() {
-    const title = document.getElementById("editTitle").value.trim();
-    const time = document.getElementById("editTime").value.trim();
-    const content = document.getElementById("editContent").value.trim();
+    const title = document.getElementById("editTitle").value;
+    const time = document.getElementById("editTime").value;
+    const content = document.getElementById("editContent").value;
     if (!title || !content) {
-        alert("标题与文章内容不能为空");
+        alert("标题和内容不能为空");
         return;
     }
     const newArticle = { title, time, content };
@@ -163,7 +272,7 @@ function saveArticle() {
 }
 
 function deleteArticle(index) {
-    if (!confirm("确定要删除这篇文章吗？")) return;
+    if (!confirm("确定删除？")) return;
     articles.splice(index, 1);
     localStorage.setItem("articles", JSON.stringify(articles));
     render();
@@ -173,5 +282,6 @@ function cancelEdit() {
     document.getElementById("editBox").style.display = "none";
 }
 </script>
+
 </body>
 </html>
